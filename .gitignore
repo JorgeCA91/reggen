@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+/Reggen/nbproject/private/
+/Reggen/build/
