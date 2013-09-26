@@ -1,14 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package reggen.com;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import javax.swing.JOptionPane;
+import reggen.helper.LogicLogin;
 
 /**
  *
@@ -16,11 +10,38 @@ import javax.swing.JTextField;
  */
 public class Login extends javax.swing.JFrame {
     
+    String user;
+    char pas[];
+    String pass;
+    
     public Login() {
         initComponents();
         this.setLocation(500, 300);
+        jButton2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent event){
+                validaLogin(event);
+            }
+        });
     }
-
+    
+    public void validaLogin(java.awt.event.MouseEvent evt) {
+        user = jTextField1.getText();
+        pas= new char[jPasswordField1.getPassword().length];
+        pas = jPasswordField1.getPassword();
+        pass="";
+        for(int i=0;i<jPasswordField1.getPassword().length;i++) {
+            pass=pass+pas[i];
+        }
+        if(LogicLogin.validadUser(user,pass)) {
+            JOptionPane.showMessageDialog(null, "Login Correcto");
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+            jTextField1.setText("");
+            jPasswordField1.setText("");
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,6 +126,7 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
